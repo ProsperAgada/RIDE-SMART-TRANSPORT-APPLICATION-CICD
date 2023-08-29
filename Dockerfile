@@ -28,4 +28,4 @@ WORKDIR /app
 COPY --from=build /app/dist ./app
 
 #start app in con
-CMD ["node","dist/index.js"]
+CMD ["node","dist/index.js"]~
