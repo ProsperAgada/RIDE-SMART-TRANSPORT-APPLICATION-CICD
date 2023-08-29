@@ -1,20 +1,35 @@
+#base image 
 FROM node:16-alpine as build
 
+#container dir
 WORKDIR /app
 
-COPY package.json yarn.lock .
+#copy package.json and yarn.lock
+COPY package.json .
 
-RUN yarn install
+COPY yarn.lock .
 
-COPY . .
+#installing yarn 
+RUN yarn 
 
-FROM nginx:alpine as production
+#copy necessary modules
+COPY . ./app
 
-WORKDIR /app
+#builing packages
+RUN yarn build
 
-COPY --from=build /usr/share/nginx/html
+#base image for production
+FROM nginx:1.15.0-alpine as production
 
+#removing default conf file
+RUN rm -rf /etc/nginx/conf.d 
+
+#copy build from build stage to production
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
+
+#set container port 
 EXPOSE 3000
 
+CMD ["nginx", "-g", "daemon off;"]
 
 
