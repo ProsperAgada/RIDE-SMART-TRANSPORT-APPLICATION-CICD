@@ -1,9 +1,15 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'Node'
+    }
     stages {
         stage('build') {
             steps {
-                echo "Cloning backend.."          
+                echo "building backend.."
+                sh "npm install -g yarn"
+                sh "yarn install"
+                sh "yarn build"          
             }
         }
         stage('build image') {
