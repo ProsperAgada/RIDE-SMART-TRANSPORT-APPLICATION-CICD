@@ -10,13 +10,10 @@ COPY package.json .
 COPY yarn.lock .
 
 #installing yarn 
-RUN yarn 
+RUN yarn install
 
 #copy necessary modules
 COPY . ./app
-
-#builing packages
-RUN yarn build
 
 #base image for production
 FROM nginx:1.15.0-alpine as production
@@ -26,6 +23,9 @@ RUN rm -rf /etc/nginx/conf.d
 
 #copy build from build stage to production
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
+
+#builing packages
+RUN yarn start 
 
 #set container port 
 EXPOSE 3000
