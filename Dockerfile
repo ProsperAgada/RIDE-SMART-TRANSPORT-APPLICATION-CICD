@@ -10,13 +10,13 @@ COPY package.json .
 COPY yarn.lock .
 
 #installing yarn 
-RUN yarn 
+RUN yarn install
 
 #copy necessary modules
 COPY . ./app
 
 #builing packages
-RUN yarn build && ls 
+RUN yarn start 
 
 #base image for production
 FROM nginx:1.15.0-alpine as production
