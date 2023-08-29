@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator joi {
+  provider = "prisma-joi-generator"
+  output   = "./joi"
+}
+
+// generator erd {
+//   provider = "prisma-erd-generator"
+//   output   = "erd.png"
+// }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  User
+  Driver
+}
+
+enum Status {
+  Cancelled
+  Active
+  Refunded
+  Paid
+  Used
+}
+
+enum Currency {
+  NGN
+  GBP
+  USD
+  EUR
+  GHS
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName      String
+  lastName       String
+  matricNo       String   @unique
+  email          String   @unique
+  password       String
+  phone          String
+  role           Role     @default(User)
+  createAt       DateTime @default(now())
+  tickets        Ticket[] @relation("UserTicket")
+  verify_tickets Ticket[] @relation("DriverTicket")
+}
+
+model Ticket {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String   @unique
+  from          String
+  to            String
+  seat          Int
+  price         String   @default("150")
+  amount        String
+  status        Status   @default(Active)
+  date          DateTime @default(now())
+  isPaymentMade Boolean  @default(false)
+  currency      Currency @default(NGN)
+  trans_id      String?
+  payment_type  String?
+  callbackUrl   String   @default("http://localhost:3000/booking")
+  driver        User?    @relation("DriverTicket", fields: [driverId], references: [id])
+  user          User     @relation("UserTicket", fields: [userId], references: [id])
+  userId        String   @db.ObjectId
+  driverId      String?  @db.ObjectId
+}
