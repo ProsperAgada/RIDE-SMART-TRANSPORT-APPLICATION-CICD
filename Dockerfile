@@ -16,7 +16,7 @@ RUN yarn
 COPY . ./app
 
 #builing packages
-RUN yarn build
+RUN yarn build && ls 
 
 #base image for production
 FROM nginx:1.15.0-alpine as production
