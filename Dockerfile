@@ -1,5 +1,8 @@
 FROM nginx:latest
 
+#setting workdir
+WORKDIR .
+
 #removing default conf file
 RUN rm -rf /etc/nginx/conf.d 
 
