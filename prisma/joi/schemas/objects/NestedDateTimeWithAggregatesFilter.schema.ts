@@ -5,8 +5,6 @@ import { NestedDateTimeFilterSchemaObject } from './NestedDateTimeFilter.schema'
 
 export const NestedDateTimeWithAggregatesFilterSchemaObject = {
     equals: Joi.date(),
-  in: Joi.array().items(Joi.date()),
-  notIn: Joi.array().items(Joi.date()),
   lt: Joi.date(),
   lte: Joi.date(),
   gt: Joi.date(),

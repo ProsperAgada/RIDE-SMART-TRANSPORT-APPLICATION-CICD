@@ -6,8 +6,10 @@ import { NestedFloatFilterSchemaObject } from './NestedFloatFilter.schema'
 
 export const IntWithAggregatesFilterSchemaObject = {
     equals: Joi.number(),
-  in: Joi.array().items(Joi.number()),
-  notIn: Joi.array().items(Joi.number()),
+  in: Joi.alternatives().try(Joi.array().items(Joi.number()),
+Joi.number()),
+  notIn: Joi.alternatives().try(Joi.array().items(Joi.number()),
+Joi.number()),
   lt: Joi.number(),
   lte: Joi.number(),
   gt: Joi.number(),

@@ -52,7 +52,7 @@ import cors from "cors";
 
   app.get("/", (_req: Request, res: Res) => {
     res.send(
-      '<h1 style="text-align: center;">RideSmart Server is Ready 👌!</h1>'
+      '<h1 style="text-align: center;">RideSmart Backend Server is Ready 👌!</h1>'
     );
   });
 

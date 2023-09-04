@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node index.js",
+    "start": "node ./dist/index.js",
+    "create": "npm run build && npm start",
     "dev": "cross-env NODE_ENV=development nodemon",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",
@@ -24,6 +25,7 @@
     "@types/node": "^18.15.8",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
+    "cjs": "^0.0.11",
     "cloudinary": "^1.35.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
@@ -66,7 +68,7 @@
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nodemon": "^2.0.22",
+    "nodemon": "^3.0.1",
     "prisma": "^4.11.0",
     "prisma-erd-generator": "1.2.4",
     "ts-node": "^10.9.1"

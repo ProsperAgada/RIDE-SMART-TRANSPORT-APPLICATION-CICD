@@ -5,8 +5,10 @@ import { NestedStringNullableFilterSchemaObject } from './NestedStringNullableFi
 
 export const NestedStringNullableWithAggregatesFilterSchemaObject = {
     equals: Joi.alternatives().try(Joi.string()),
-  in: Joi.alternatives().try(Joi.array().items(Joi.string())),
-  notIn: Joi.alternatives().try(Joi.array().items(Joi.string())),
+  in: Joi.alternatives().try(Joi.array().items(Joi.string()),
+Joi.string()),
+  notIn: Joi.alternatives().try(Joi.array().items(Joi.string()),
+Joi.string()),
   lt: Joi.string(),
   lte: Joi.string(),
   gt: Joi.string(),

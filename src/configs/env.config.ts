@@ -10,5 +10,5 @@ export const envConfig: IEnvConfig = {
   dev: ENV === "development",
   prod: ENV === "production",
   url: process.env.BASE_URL as string,
-  port: +(process.env.PORT as unknown as number) || 8080
+  port: +(process.env.PORT as unknown as number) || 8081
 };
